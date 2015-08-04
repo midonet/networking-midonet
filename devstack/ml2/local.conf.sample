@@ -6,13 +6,13 @@
 enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
 NEUTRON_LBAAS_SERVICE_PROVIDERV1="LOADBALANCER:Midonet:midonet.neutron.services.loadbalancer.driver.MidonetLoadbalancerDriver:default"
 
-# To use the v2 plugin and l3 service, uncomment the following lines.
-# MIDONET_PLUGIN=midonet.neutron.plugin_v2.MidonetPluginV2
-# Q_SERVICE_PLUGIN_CLASSES=midonet.neutron.services.l3.l3_midonet.MidonetL3ServicePlugin
-# Q_L3_ENABLED=True
+# Load the devstack plugin for ml2
+Q_PLUGIN=ml2
+Q_ML2_PLUGIN_MECHANISM_DRIVERS=midonet
+Q_ML2_PLUGIN_TYPE_DRIVERS=midonet
+Q_ML2_TENANT_NETWORK_TYPE=midonet
+ML2_L3_PLUGIN=midonet.neutron.services.l3.l3_midonet.MidonetL3ServicePlugin
 
-# Load the devstack plugin for midonet
-Q_PLUGIN=midonet
 enable_plugin networking-midonet http://github.com/openstack/networking-midonet.git
 
 # Set all the passwords
@@ -34,6 +34,10 @@ ENABLED_SERVICES+=,horizon
 ENABLED_SERVICES+=,n-novnc,n-cauth
 
 NOVA_VNC_ENABLED=True
+
+# ML2 only works with v2 architecture
+#
+MIDONET_USE_ZOOM=True
 
 # The following section contains environment variable settings that would
 # further minimalize the environment.  For example, in some cases you may just
@@ -58,6 +62,3 @@ NOVA_VNC_ENABLED=True
 # disable_service q-dhcp
 # disable_service q-meta
 
-# If you want to use the new V2 architecture of MidoNet, uncomment these:
-#
-# MIDONET_USE_ZOOM=True
