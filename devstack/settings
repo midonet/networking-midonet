@@ -29,6 +29,9 @@ MIDONET_CREATE_FAKE_UPLINK=${MIDONET_CREATE_FAKE_UPLINK:-True}
 # Routers should be per tenant
 Q_L3_ROUTER_PER_TENANT=True
 
+# Enable L3
+Q_L3_ENABLED=True
+
 # Use IPv4
 IP_VERSION=4
 
