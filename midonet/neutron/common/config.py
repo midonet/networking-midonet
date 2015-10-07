@@ -18,6 +18,8 @@
 from oslo.config import cfg
 
 midonet_opts = [
+    cfg.BoolOpt('enable_lb', default=True,
+               help=_('setting to false will disable Midonet LBaaS support')),
     cfg.StrOpt('midonet_uri', default='http://localhost:8080/midonet-api',
                help=_('MidoNet API server URI.')),
     cfg.StrOpt('username', default='admin',

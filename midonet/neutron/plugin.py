@@ -53,6 +53,10 @@ from neutron.plugins.common import constants
 
 LOG = logging.getLogger(__name__)
 
+configurable_ext = []
+if cfg.CONF.MIDONET.enable_lb:
+    configurable_ext = ['lbaas']
+
 
 class MidonetPluginV2(db_base_plugin_v2.NeutronDbPluginV2,
                       portbindings_db.PortBindingMixin,
@@ -72,8 +76,7 @@ class MidonetPluginV2(db_base_plugin_v2.NeutronDbPluginV2,
                                    'router',
                                    'quotas',
                                    'security-group',
-                                   'routed-service-insertion',
-                                   'lbaas']
+                                   'routed-service-insertion'] + configurable_ext
     __native_bulk_support = True
 
     def __init__(self):
